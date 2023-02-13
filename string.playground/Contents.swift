@@ -431,3 +431,300 @@ func shortestDistance( words : [String],  word1 : String,  word2 : String) -> In
 }
 
 //print(shortestDistance(words: ["practice", "makes", "perfect", "coding", "makes","practice", "makes", "perfect", "coding", "makes"], word1: "makes", word2: "practice"))
+
+//[LeetCode 246. 中心对称数（哈希)](https://cloud.tencent.com/developer/article/1660429)
+/*
+中心对称数是指一个数字在旋转了 180 度之后看起来依旧相同的数字（或者上下颠倒地看）。
+
+请写一个函数来判断该数字是否是中心对称数，其输入将会以一个字符串的形式来表达数字。
+
+示例 1:
+输入:  "69"
+输出: true
+
+示例 2:
+输入:  "88"
+输出: true
+
+示例 3:
+输入:  "962"
+输出: false
+复制
+ 来源：力扣（LeetCode）
+ 链接：https://leetcode-cn.com/problems/strobogrammatic-number
+ 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+*/
+
+func isStrobogrammatic( num : String) -> Bool {
+    let rg : [Character : Character] = ["1" : "1" , "6" : "9" , "0" : "0", "8" : "8" , "9" : "6" ]
+    var length = num.count
+    var index = length - 1
+    var c : Character
+    var numcs = Array(num)
+    var new : String = ""
+    while index >= 0 {
+        c = numcs[index]
+        if !rg.keys.contains(c) {
+            return false
+        }
+        new.append(rg[c]!)
+        index -= 1
+        
+    }
+    print(new)
+    return new == num
+}
+
+//print(isStrobogrammatic(num: "9886"))
+
+//【LeetCode - 266】回文排列
+
+ /*
+  给定一个字符串，判断该字符串中是否可以通过重新排列组合，形成一个回文字符串。
+
+  示例 1：
+  输入: "code"
+  输出: false
+
+  示例 2：
+  输入: "aab"
+  输出: true
+
+  示例 3：
+  输入: "carerac"
+  输出: true
+  复制
+   来源：力扣（LeetCode）
+   链接：https://leetcode-cn.com/problems/palindrome-permutation
+   著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+  */
+
+//思路1:最多有一个字符的数量是奇数,其余字符为偶数
+
+func  canPermutePalindrome(s : String) -> Bool {
+    var s = Array(s)
+    var count = Array(repeating: 0, count: 26)
+    for value in s {
+        count[Int(value.asciiValue!) - 97] += 1
+    }
+    var c = 0
+    for v in count {
+        if v%2 != 0 {
+            c += 1
+        }
+    }
+    print(count,c)
+    return c <= 1
+}
+
+//print(canPermutePalindrome(s: "abcbcadrr"))
+
+
+//[290. 单词规律]
+/*
+ 给定一种规律 pattern 和一个字符串 s ，判断 s 是否遵循相同的规律。
+
+ 这里的 遵循 指完全匹配，例如， pattern 里的每个字母和字符串 s 中的每个非空单词之间存在着双向连接的对应规律。
+
+  
+
+ 示例1:
+
+ 输入: pattern = "abba", s = "dog cat cat dog"
+ 输出: true
+ 示例 2:
+
+ 输入:pattern = "abba", s = "dog cat cat fish"
+ 输出: false
+ 示例 3:
+
+ 输入: pattern = "aaaa", s = "dog cat cat dog"
+ 输出: false
+
+
+ 来源：力扣（LeetCode）
+ 链接：https://leetcode.cn/problems/word-pattern
+ 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+
+//解题思路 通过map映射判断
+
+func wordPattern(_ pattern: String, _ s: String) -> Bool {
+    var p = Array(pattern)
+    var ss = s.split(separator: " ")
+    if p.count != ss.count {
+        return false
+    }
+    var map : [Character : Substring] = [:]
+    var map1 : [Substring : Character] = [:]
+    var index = 0
+    var key : Character
+    var value : Substring
+    var v : Substring?
+    var k : Character?
+    while index < p.count {
+        key = p[index]
+        value = ss[index]
+        v = map[key]
+        if v != nil && v != value {
+            return false
+        }
+        k = map1[value]
+        if k != nil && k != key {
+            return false
+        }
+        
+        map[key] = value
+        map1[value] = key
+        index += 1
+    }
+    return true
+}
+
+
+//print(wordPattern("abc", "dog cat dog"))
+
+//[ LeetCode 293. 翻转游戏]
+/*
+ 
+ 1. 题目
+ 你和朋友玩一个叫做「翻转游戏」的游戏，游戏规则：给定一个只有 + 和 - 的字符串。
+  你和朋友轮流将 连续 的两个 “++” 反转成 “–”。
+  当一方无法进行有效的翻转时便意味着游戏结束，则另一方获胜。
+
+ 请你写出一个函数，来计算出第一次翻转后，字符串所有的可能状态。
+
+ 示例：
+ 输入: s = "++++"
+ 输出:
+ [
+   "--++",
+   "+--+",
+   "++--"
+ ]
+ 注意：如果不存在可能的有效操作，请返回一个空列表 []。
+ 复制
+  来源：力扣（LeetCode） 链接：https://leetcode-cn.com/problems/flip-game
+  著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+
+ 
+//思路: 双指针,连续++则转为--
+
+func generatePossibleNextMoves(s : String) -> [String] {
+    if s.count <= 1 {
+        return []
+    }
+    var strs : [String] = []
+    var sc = Array(s)
+    var ts = sc
+    var fre = 0
+    var pre = 1
+    var p : Character
+    var f : Character
+    while pre < s.count {
+        f = sc[fre]
+        p = sc[pre]
+        if f == "+" && p == f {
+            ts[fre] = "-"
+            ts[pre] = "-"
+            strs.append(String(ts))
+        }
+        
+        pre += 1
+        fre += 1
+        ts = sc
+    }
+    
+    return strs
+}
+
+//print(generatePossibleNextMoves(s: "++++"))
+
+//[ 344. 反转字符串]
+/*
+
+ 编写一个函数，其作用是将输入的字符串反转过来。输入字符串以字符数组 s 的形式给出。
+
+ 不要给另外的数组分配额外的空间，你必须原地修改输入数组、使用 O(1) 的额外空间解决这一问题。
+ */
+func reverseString(_ s: inout [Character]) {
+    var right = 0
+    var left = s.count - 1
+    var temp : Character
+    while right < s.count/2 {
+        temp = s[right]
+        s[right] = s[left]
+        s[left] = temp
+        right += 1
+        left -= 1
+    }
+}
+//var s = Array("1234567")
+//reverseString(&s)
+//print(s)
+
+
+//[345. 反转字符串中的元音字母]
+/*
+ 给你一个字符串 s ，仅反转字符串中的所有元音字母，并返回结果字符串。
+
+ 元音字母包括 'a'、'e'、'i'、'o'、'u'，且可能以大小写两种形式出现不止一次。
+
+ 示例 1：
+
+ 输入：s = "hello"
+ 输出："holle"
+ 示例 2：
+
+ 输入：s = "leetcode"
+ 输出："leotcede"
+
+ 来源：力扣（LeetCode）
+ 链接：https://leetcode.cn/problems/reverse-vowels-of-a-string
+ 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+
+//思路: 双指针, 首位同事遍历,满足同时都遇到元音,遇到元音后交换指针内容 , 首位指针相等时结束
+func reverseVowels(_ s: String) -> String {
+    var right = 0
+    var s = Array(s)
+    var left = s.count - 1
+    var yy : [Character] = ["a","e","i","o","u","A","E","I","O","U"]
+    var temp : Character = " "
+    while right < left {
+        while !yy.contains(s[right]) && right < left{
+            right += 1
+        }
+        
+        while !yy.contains(s[left]) && left > right {
+            left -= 1
+        }
+        
+        temp = s[right]
+        s[right] = s[left]
+        s[left] = temp
+        right += 1
+        left -= 1
+    }
+    
+    return String(s)
+}
+
+
+//思路2 : 将元音字符的下标记录下来,然后统一做交换
+
+
+print(reverseVowels("leetcode"))
+
+
+
+
+
+
+
+
+//给定字符串数组 保证只在规定的长度内显示
+
+
+

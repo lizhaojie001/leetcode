@@ -24,3 +24,17 @@
 [242. 有效的字母异位词](https://leetcode.cn/problems/valid-anagram/)
 
 [243. 最短单词距离](https://cloud.tencent.com/developer/article/1660300)
+
+[LeetCode 246. 中心对称数（哈希)](https://cloud.tencent.com/developer/article/1660429)
+
+[257. 二叉树的所有路径](https://leetcode.cn/problems/binary-tree-paths/)
+
+[LeetCode - 266】回文排列](https://blog.csdn.net/qq_29051413/article/details/108730507)
+
+[290. 单词规律](https://leetcode.cn/problems/word-pattern/)
+
+[LeetCode 293. 翻转游戏](https://cloud.tencent.com/developer/article/1660259)
+
+[344. 反转字符串](https://leetcode.cn/problems/reverse-string/)
+
+
