@@ -37,4 +37,6 @@
 
 [344. 反转字符串](https://leetcode.cn/problems/reverse-string/)
 
+[383. 赎金信](https://leetcode.cn/problems/ransom-note)
 
+[387. 字符串中的第一个唯一字符](https://leetcode.cn/problems/first-unique-character-in-a-string/)

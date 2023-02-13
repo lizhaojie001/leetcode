@@ -715,16 +715,69 @@ func reverseVowels(_ s: String) -> String {
 //思路2 : 将元音字符的下标记录下来,然后统一做交换
 
 
-print(reverseVowels("leetcode"))
+//print(reverseVowels("leetcode"))
 
 
+//[383. 赎金信]
+
+/*
+ 给你两个字符串：ransomNote 和 magazine ，判断 ransomNote 能不能由 magazine 里面的字符构成。
+
+ 如果可以，返回 true ；否则返回 false 。
+
+ magazine 中的每个字符只能在 ransomNote 中使用一次。
+
+ 来源：力扣（LeetCode）
+ 链接：https://leetcode.cn/problems/ransom-note
+ 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
+func canConstruct(_ ransomNote: String, _ magazine: String) -> Bool {
+    if ransomNote.count > magazine.count {
+        return false
+    }
+    var r = Array(ransomNote)
+    var m = Array(magazine)
+    var b : [Int] = Array(repeating: 0, count: 26 )
+   
+    for v in m {
+        b[Int(v.asciiValue!) - 97] += 1
+    }
+    
+    for v in r {
+        b[Int(v.asciiValue!) - 97] -= 1
+        if  b[Int(v.asciiValue!) - 97] < 0{
+            return false
+        }
+    }
+    
+    return true
+ }
+ 
 
 
+//[387. 字符串中的第一个唯一字符]
+/*
+ 给定一个字符串 s ，找到 它的第一个不重复的字符，并返回它的索引 。如果不存在，则返回 -1 。
+ https://leetcode.cn/problems/first-unique-character-in-a-string/
+ */
 
+func firstUniqChar(_ s: String) -> Int {
+    var s = Array(s)
+    var a : [Int] = Array(repeating: 0, count: 26)
+    for v in s {
+        a[Int(v.asciiValue!) - 97] += 1
+    }
+    var index = 0
+    while index < s.count {
+        if a[Int(s[index].asciiValue!) - 97] == 1 {
+            return index
+        }
+        index += 1
+    }
+    
+    return -1
+}
 
-
-
-//给定字符串数组 保证只在规定的长度内显示
-
+print(firstUniqChar("aabb"))
 
 
