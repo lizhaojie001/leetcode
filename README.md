@@ -40,3 +40,9 @@
 [383. 赎金信](https://leetcode.cn/problems/ransom-note)
 
 [387. 字符串中的第一个唯一字符](https://leetcode.cn/problems/first-unique-character-in-a-string/)
+
+[389. 找不同](https://leetcode.cn/problems/find-the-difference)
+
+[392. 判断子序列](https://leetcode.cn/problems/is-subsequence)
+
+[LeetCode 408.有效单词缩写](https://zhuanlan.zhihu.com/p/105111010)
